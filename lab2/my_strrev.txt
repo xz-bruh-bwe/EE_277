@@ -1,0 +1,34 @@
+; void my_strrev(char *str);
+_my_strrev(char *str)
+{
+    PUSH    {r1-r5, lr}         ; Save used registers
+
+    MOV     r1, r0              ; r1 = str (start pointer)
+    MOV     r2, r0              ; r2 = temp pointer to find end
+
+find_end
+    LDRB    r3, [r2]            ; Load byte
+    CMP     r3, #0              ; Null terminator?
+    BEQ     end_found
+    ADD     r2, r2, #1          ; Move to next Char
+    B       find_end
+
+end_found
+    SUB     r2, r2, #1          ; r2 = end pointer (last character before null)
+
+rev_loop
+    CMP     r1, r2              ; While start < end
+    BHS     done
+
+    LDRB    r3, [r1]            ; Load *start
+    LDRB    r4, [r2]            ; Load *end
+    STRB    r4, [r1]            ; Store end at start
+    STRB    r3, [r2]            ; Store start at end
+
+    ADD     r1, r1, #1          ; start++
+    SUB     r2, r2, #1          ; end--
+    B       rev_loop			;
+
+done
+    POP     {r1-r5, pc}         ; Restore and returnTofunction
+}
