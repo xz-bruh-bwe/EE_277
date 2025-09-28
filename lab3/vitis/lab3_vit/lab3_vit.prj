@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="lab3_vit" location="Z:/EE_277/lab3/vitis/lab3_vit" platform="Z:/EE_277/lab3/vitis/lab3_sa/export/lab3_sa/lab3_sa.xpfm" platformUID="xilinx:zybo-z7-10::0.0(custom)" systemProject="lab3_vit_sys" sysConfig="lab3_sa" runtime="cpp" cpu="standalone_ps7_cortexa9_0" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="799a9c621bd516403fbab1fe0312ee44">
+  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.1140574653">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.1539718488" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="empty_application"/>
+</sdkproject:SdkProject>

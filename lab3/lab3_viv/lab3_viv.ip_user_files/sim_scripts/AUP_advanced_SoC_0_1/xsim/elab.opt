@@ -1,0 +1,1 @@
+--incr --debug typical --relax --mt 2  -L xil_defaultlib -L xilinx_vip -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot AUP_advanced_SoC_0 xil_defaultlib.AUP_advanced_SoC_0 xil_defaultlib.glbl -log elaborate.log
