@@ -1,0 +1,5 @@
+AUP_advanced_SoC_v1_0_S00_AXI.v,verilog,xil_defaultlib,../../../../lab3_viv.gen/sources_1/ip/AUP_advanced_SoC_0_1/hdl/AUP_advanced_SoC_v1_0_S00_AXI.v,
+AUP_advanced_SoC_v1_0.v,verilog,xil_defaultlib,../../../../lab3_viv.gen/sources_1/ip/AUP_advanced_SoC_0_1/hdl/AUP_advanced_SoC_v1_0.v,
+DeBounce_v.v,verilog,xil_defaultlib,../../../../lab3_viv.gen/sources_1/ip/AUP_advanced_SoC_0_1/src/DeBounce_v.v,
+AUP_advanced_SoC_0.v,verilog,xil_defaultlib,../../../../lab3_viv.gen/sources_1/ip/AUP_advanced_SoC_0_1/sim/AUP_advanced_SoC_0.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v
