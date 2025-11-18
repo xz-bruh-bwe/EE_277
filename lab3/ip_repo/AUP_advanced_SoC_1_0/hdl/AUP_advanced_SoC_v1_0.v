@@ -15,11 +15,11 @@
 	)
 	(
 		// Users to add ports here
-        input wire [3:0] sw, // adds 4 switches to the input ports
-        input wire [1:0] btn_in, //adds two buttons to the input ports
+        input wire [0:0] sw_start, // adds detection of 1 input switch 
+        input wire [0:0] count_stop, //adds detection of 1 stop signal
                 
         /* LD3-LD0 & LD5 & LD6*/
-        output wire [5:0] led, // Adds 5 LEDs to the output ports
+        //output wire [5:0] led, // Adds 5 LEDs to the output ports
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -48,16 +48,16 @@
 		input wire  s00_axi_rready
 	);
 	
-	wire [1:0] btn_db;
+	//wire [1:0] btn_db;
 // Instantiation of Axi Bus Interface S00_AXI
 	AUP_advanced_SoC_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
 		.C_S_AXI_ADDR_WIDTH(C_S00_AXI_ADDR_WIDTH)
 	) AUP_advanced_SoC_v1_0_S00_AXI_inst (
 	   // USER ADDED: 
-	    .sw(sw),
-	    .led(led), 
-	    .btn(btn_db), 
+	    .sw_start(sw_start),
+	    .count_stop(count_stop), 
+	    //.btn(btn_db), 
 	    
 	    // DEFAULT
 		.S_AXI_ACLK(s00_axi_aclk),
@@ -85,20 +85,20 @@
 
 	// Add user logic here
 // Instantiation of button debounce: 
-DeBounce DeBounce_btn0(
-	.clk(s00_axi_aclk), 
-	.n_reset(s00_axi_aresetn), 
-	.button_in(btn_in[0]),		
-	.DB_out(btn_db[0])													
-	);
+//DeBounce DeBounce_btn0(
+//	.clk(s00_axi_aclk), 
+//	.n_reset(s00_axi_aresetn), 
+//	.button_in(btn_in[0]),		
+//	.DB_out(btn_db[0])													
+//	);
 
 	// Instantiation of button debounce: 
-DeBounce DeBounce_btn1(
-	.clk(s00_axi_aclk), 
-	.n_reset(s00_axi_aresetn), 
-	.button_in(btn_in[1]),				
-	.DB_out(btn_db[1])													
-	);
+//DeBounce DeBounce_btn1(
+//	.clk(s00_axi_aclk), 
+//	.n_reset(s00_axi_aresetn), 
+//	.button_in(btn_in[1]),				
+//	.DB_out(btn_db[1])													
+//	);
 	// User logic ends
 
 	endmodule

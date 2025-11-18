@@ -15,10 +15,10 @@
 	)
 	(
 		// Users to add ports here
-        input wire [3:0] sw, 
-		input wire [1:0] btn,
+        input wire [0:0] sw_start, // adds detection of 1 input switch 
+        input wire [0:0] count_stop, //adds detection of 1 stop signal
 				
-		output wire [5:0] led, 
+		//output wire [5:0] led, 
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -373,7 +373,7 @@
 	begin
 	      // Address decoding for reading registers
 	      case ( axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
-	        2'h0   : reg_data_out <= {slv_reg0[C_S_AXI_DATA_WIDTH-1:6], btn[1:0], sw[3:0]};
+	        2'h0   : reg_data_out <= {slv_reg0[C_S_AXI_DATA_WIDTH-1:16], counter[15:0]};
 	        2'h1   : reg_data_out <= slv_reg1;
 	        2'h2   : reg_data_out <= slv_reg2;
 	        2'h3   : reg_data_out <= slv_reg3;
@@ -399,12 +399,42 @@
 	        end   
 	    end
 	end    
-
-	// Add user logic here
+	//input wire [0:0] sw_start, // adds detection of 1 input switch 
+    //sinput wire [0:0] count_stop, //adds detection of 1 stop signal
+    
     //Hardware Logic Mapping:
-    assign led[3:0] = slv_reg1[3:0] | {4{slv_reg1[5]}}; // Maps sw to leds 0-3 or btn1 to turn on les 0-3
-	assign led[4] = slv_reg1[4]; // Maps  btn 0 to rgb blue led[4] (Blue)
-	assign led[5] = slv_reg1[5]; // Maps  btn 1 to rgb red ot led[5] (Red)
+    reg [15:0] counter;
+    reg latched;   // internal flag that remembers we’ve stopped
+
+always @(posedge S_AXI_ACLK) begin
+    if (!sw_start) begin
+        // Reset everything when start goes low
+        counter <= 16'd0;
+        latched <= 1'b0;
+    end
+    else begin
+        if (!latched) begin
+            // Still counting until stop signal is seen
+            if (!count_stop) begin
+                counter <= counter + 1'b1;
+            end
+            else begin
+                // Stop counting and freeze value forever
+                latched <= 1'b1;
+                counter <= counter;  // hold
+            end
+        end
+        else begin
+            // Already latched, hold forever until sw_start resets
+            counter <= counter;
+        end
+    end
+end
+       
+    
+    //assign led[3:0] = slv_reg1[3:0] | {4{slv_reg1[5]}}; // Maps sw to leds 0-3 or btn1 to turn on les 0-3
+	//assign led[4] = slv_reg1[4]; // Maps  btn 0 to rgb blue led[4] (Blue)
+	//assign led[5] = slv_reg1[5]; // Maps  btn 1 to rgb red ot led[5] (Red)
 	// User logic ends
 
 	endmodule
